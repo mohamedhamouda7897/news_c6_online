@@ -1,11 +1,21 @@
-import 'package:flutter/material.dart';
-import 'package:news_c6_online/models/SourcesResponse.dart';
-import 'package:news_c6_online/modules/home/tabscontroller.dart';
-import 'package:news_c6_online/shared/network/remote/api_manager.dart';
 
-class HomeScreen extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:news_c6_online/modules/home/news_fragment.dart';
+import '../../models/categroy_model.dart';
+import 'package:news_c6_online/modules/home/categories_fragment.dart';
+
+
+import 'home_drawer.dart';
+
+class HomeScreen extends StatefulWidget {
 
   static const String routeName='home';
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,37 +23,34 @@ class HomeScreen extends StatelessWidget {
         centerTitle: true,
         title: Text('News app'),
       ),
-      body: Container(
-        child: FutureBuilder<SourcesResponse>(
-          future: ApiManager.getSources() ,
-          builder: (c,snapShot){
-
-            if(snapShot.connectionState == ConnectionState.waiting){
-              return Center(child: CircularProgressIndicator());
-            }
-            if(snapShot.hasError){
-              return Column(
-                children: [
-                  Text('Something went wrong'),
-                  ElevatedButton(onPressed: (){}, child: Text('Try Again')),
-                ],
-              );
-            }
-            if("ok" != snapShot.data?.status){ // error
-              return Column(
-                children: [
-                  Text('Something went wrong'),
-                  ElevatedButton(onPressed: (){}, child: Text('Try Again')),
-                ],
-              );
-            }
-
-            // i have data
-            var SourcesList=snapShot.data?.sources ??[];
-            return TabControllerItem(SourcesList);
-          },
-        ),
-      ),
+      drawer: HomeDrawer(onMenuItemClicked),
+      body: selectedCategory==null?CategoriesFragment(onCatgoryClicked)
+          :NewsFragment(selectedCategory!)
     );
+  }
+
+  Category? selectedCategory;
+
+
+  void onMenuItemClicked(int itemCliked){
+Navigator.pop(context);
+
+if(itemCliked==HomeDrawer.CATEGORY){
+  selectedCategory=null;
+  setState(() {
+
+  });
+}else if(itemCliked==HomeDrawer.SETTING){
+
+}
+
+  }
+
+  void onCatgoryClicked(Category category){
+    // change ui body
+    selectedCategory=category;
+    setState(() {
+
+    });
   }
 }

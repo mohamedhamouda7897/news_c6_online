@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_c6_online/models/NewsResponse.dart';
 import 'package:news_c6_online/models/SourcesResponse.dart';
+import 'package:news_c6_online/modules/news/news_item.dart';
 import 'package:news_c6_online/shared/network/remote/api_manager.dart';
 
 class NewsData extends StatelessWidget {
@@ -10,7 +11,7 @@ class NewsData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<NewsResponse>(
-        future: ApiManager.getNews(newsSource),
+        future: ApiManager.getNews(newsSource,""),
         builder: (_,snapShot){
           if(snapShot.connectionState == ConnectionState.waiting){
             return Center(child: CircularProgressIndicator());
@@ -36,7 +37,8 @@ class NewsData extends StatelessWidget {
           return ListView.builder(
               itemCount: newsList.length,
               itemBuilder:(c,index){
-                return Text(newsList[index].title ?? "");
+                return NewsItem(newsList[index]);
+                // return Text(newsList[index].title ?? "");
               } ) ;
           
         });

@@ -10,9 +10,10 @@ import '../../components/constant.dart';
 class ApiManager{
 
 
-  static Future<SourcesResponse> getSources() async{
+  static Future<SourcesResponse> getSources(String categoriID) async{
     // call api
-    var uri =Uri.https(BASEURl, '/v2/top-headlines/sources',{"apikey":APIKEY});
+    var uri =Uri.https(BASEURl, '/v2/top-headlines/sources',{"apikey":APIKEY ,
+    'category':categoriID});
     var response =  await http.get(uri);
     try{
         var bodyString=   response.body;
@@ -25,8 +26,8 @@ class ApiManager{
   }
 
 
-  static Future<NewsResponse> getNews(Sources source)async{
-    var uri =Uri.https(BASEURl, '/v2/everything',{"apikey":APIKEY,"sources":source.id});
+  static Future<NewsResponse> getNews(Sources source,String search)async{
+    var uri =Uri.https(BASEURl, '/v2/everything',{"apikey":APIKEY,"sources":source.id , 'q':search});
     var response =  await http.get(uri);
     try{
       var bodyString=   response.body;

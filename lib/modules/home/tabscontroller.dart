@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news_c6_online/modules/home/news.dart';
+import 'package:news_c6_online/modules/news/news.dart';
 import 'package:news_c6_online/modules/home/tabItem.dart';
 
 import '../../models/SourcesResponse.dart';
@@ -27,9 +27,7 @@ class _TabControllerItemState extends State<TabControllerItem> {
               indicatorColor: Colors.transparent,
               onTap: (index){
                 isSelectedIndex=index;
-                setState(() {
-
-                });
+                setState(() {});
               },
               tabs: widget.sources.map((Onesource) =>
                   TabItem(Onesource, isSelectedIndex==widget.sources.indexOf(Onesource))).toList(),

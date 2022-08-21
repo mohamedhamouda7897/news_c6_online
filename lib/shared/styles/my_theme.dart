@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MyThemeData {
-  static Color primaryColor = Color(0xFF00E225);
+  static Color primaryColor = Color(0xFF39A552);
   static Color OnprimaryColor = Color(0xFFDFECDB);
   static Color RedColor = Color(0xFFEC4B4B);
   static Color GreenColor = Color(0xFF61E757);
@@ -18,30 +18,22 @@ class MyThemeData {
         iconTheme: IconThemeData(color: WhiteColor)),
     textTheme: TextTheme(
       headline1: TextStyle(
-        fontSize: 25,
-        color: WhiteColor,
+        fontSize: 14,
+        color: BlackColor,
         fontWeight: FontWeight.w700,// text AppBar
       ),
-      headline2: TextStyle(
-        fontSize: 25,
-        color:BlackColor ,
-        fontWeight: FontWeight.bold,//text Add New Task
-      ),
+
       headline3: TextStyle(
-        fontSize: 25,
+        fontSize: 13,
         color: Colors.grey,//text of badg of Add New Task__feild text
         fontWeight: FontWeight.w400,
       ),
       subtitle1: TextStyle(
-        fontSize: 25,
-        color: Colors.black,
+        fontSize: 10,
+        color: Colors.grey,
         fontWeight: FontWeight.w500,
       ),
-      bodyText1: TextStyle(
-        fontSize: 15,
-        color: Colors.black,
-        fontWeight: FontWeight.w500,// task titel
-      ),
+
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
         selectedItemColor: primaryColor, unselectedItemColor: Colors.grey),
